@@ -4,6 +4,9 @@ var path = require('path');
 var logger = require('morgan');
 
 //2. DB settings
+var mongoose = require('mongoose');
+var db = require('./model/items');
+var Item = mongoose.model('Item');
 
 
 //3. App instantiation
@@ -24,7 +27,17 @@ app.use(logger('dev'));
 
 //6. Routes
 app.get('/', function(req, res) {
-    res.send('this is the home page');
+
+    var julio = new Item({
+        name: 'Julio'
+    });
+    julio.save();
+
+    Item.find(function(error, result) {
+
+        console.log(JSON.stringify(result));
+        res.send('this is the home page, ok?');
+    });
 });
 
 app.all('*', function(req, res) {
