@@ -1,0 +1,15 @@
+extend layout
+
+block content
+  each item in items
+    ul
+      li
+        a(href='/item/' + item.id)=item.name
+
+
+  ul
+    p(style='height: 40px;')
+    li
+      a(href='/item/new') Create New Item
+    li
+      a(href='/') Home Page

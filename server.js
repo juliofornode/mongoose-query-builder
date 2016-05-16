@@ -2,15 +2,16 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
-//2. DB settings
-var mongoose = require('mongoose');
-var db = require('./model/items');
-var Item = mongoose.model('Item');
-
+//custom modules
 
 //3. App instantiation
 var app = express();
+
+//2. DB settings
+var db = require('./model/items');
+
 
 
 //4. App configuration (app.set)
@@ -23,26 +24,12 @@ var port = app.get('port');
 //5. Middleware definition (app.use)
 app.use(express.static('/public'));
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 //6. Routes
-app.get('/', function(req, res) {
-
-    var julio = new Item({
-        name: 'Julio'
-    });
-    julio.save();
-
-    Item.find(function(error, result) {
-
-        console.log(JSON.stringify(result));
-        res.send('this is the home page, ok?');
-    });
-});
-
-app.all('*', function(req, res) {
-    res.status(404).send('this is the 404 page not found');
-});
+var controller = require('./controllers/itemController');
+var routes = require('./routes/itemRoutes')(app);
 
 
 //7. Start app server with host and port

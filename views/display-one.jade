@@ -1,0 +1,16 @@
+extend layout
+
+block content
+  h2=item.name
+
+  ul
+    li
+      a(href='/item/edit/' + item.id) Edit Item
+    li
+      a(href='/item/delete/' + item.id) Delete Item
+    li
+      a(href='/item/new') Create New Item
+    li
+      a(href='/items') See All Items
+    li
+      a(href='/') Home Page

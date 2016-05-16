@@ -1,0 +1,13 @@
+extend layout
+
+block content
+  form(method='post'   action='')
+    label(for='name') Name:
+    input(id='name' name='name' type='text')
+    input(type='submit' value='enter')
+
+  ul
+    li
+      a(href='/') Home Page
+    li
+      a(href='/items') See All Items
