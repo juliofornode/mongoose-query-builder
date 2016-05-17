@@ -11,5 +11,7 @@ module.exports = function(app) {
     app.get('/item/delete/:id', controller.delete);
     app.post('/item/delete/:id', controller.doDelete);
 
+    app.get('/my-query', controller.myQuery);
+
     app.all('*', controller.pageNotFound);
 };
