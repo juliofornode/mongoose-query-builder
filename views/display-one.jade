@@ -1,7 +1,9 @@
 extend layout
 
 block content
-  h2=item.name
+  h2=item.name + ' ' + item.lastname
+  p=item.numberOfDays
+  p=item.dayOfWeek
 
   ul
     li

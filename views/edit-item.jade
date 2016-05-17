@@ -4,7 +4,15 @@ block content
   form(method='post' action='')
     label(for='name') Name:
     input(type='text' id='name' name='name' value=item.name)
+    label(for='lastname') Lastname:
+    input(type='text' id='lastname' name='lastname' value=item.lastname)
+    label(for='numberOfDays') Number of days:
+    input(type='text' id='numberOfDays' name='numberOfDays' value=item.numberOfDays)
+    label(for='dayOfWeek') Day:
+    input(type='text' id='dayOfWeek' name='dayOfWeek' value=item.dayOfWeek)
     input(type='submit' value='enter')
+
+    p=message
 
     ul
       li

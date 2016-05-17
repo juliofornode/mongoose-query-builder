@@ -12,11 +12,19 @@ exports.create = function(req, res) {
 
 exports.doCreate = function(req, res) {
     var item = new Item({
-      name: req.body.name
+      name: req.body.name,
+      lastname: req.body.lastname,
+      numberOfDays: req.body.numberOfDays,
+      dayOfWeek: req.body.dayOfWeek
     });
+
     item.save(function(error, result) {
-        console.log(result + ' has been saved');
-        res.redirect('/');
+        if(!error) {
+            res.redirect('/');
+        } else {
+            console.log('the item was not created.');
+            res.redirect('/');
+        }
     });
 };
 
@@ -34,33 +42,33 @@ exports.displayOne = function(req, res) {
 
 exports.edit = function(req, res) {
   Item.findById(req.params.id, function(error, result) {
-      console.log('item to edit: ' + result.name);
       res.render('edit-item', {pageTitle: 'Edit Item', item: result});
   })
 };
 
 exports.doEdit = function(req, res) {
     Item.findById(req.params.id, function(error, result) {
+
         result.name = req.body.name;
+        result.lastname = req.body.lastname;
+        result.numberOfDays = req.body.numberOfDays;
+        result.dayOfWeek = req.body.dayOfWeek;
+
         result.save(function(error, editado) {
-            console.log('item edited: ' + editado.name);
-            res.render('display-one', {pageTitle: 'Edit Item', item: editado});
+            res.render('display-one', {pageTitle: 'Edit Item', item: result});
         });
     })
 };
 
 exports.delete = function(req, res) {
     Item.findById(req.params.id, function(error, result) {
-        console.log('item to delete: ' + result.name);
         res.render('delete-item', {pageTitle: 'Delete Item', item: result});
     })
 };
 
 exports.doDelete = function(req, res) {
     Item.findById(req.params.id, function(error, result) {
-        result.name = req.body.name;
         result.remove(function(error, removed) {
-            console.log('item removed: ' + removed.name);
             res.redirect('/');
         });
     })
